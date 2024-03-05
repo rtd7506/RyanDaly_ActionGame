@@ -1,8 +1,12 @@
 /// @description Insert description here
 // You can write your code in this editor
-
-xVel = moveX*moveSpd+forceX
-yVel = moveY*moveSpd+forceY
+if !dying{
+	xVel = moveX*moveSpd+forceX
+	yVel = moveY*moveSpd+forceY
+}else{
+	xVel = forceX
+	yVel = forceY
+}
 
 if (abs(xVel)+abs(yVel)> moveSpd){
 	xVel = xVel/sqrt(2)
@@ -17,13 +21,21 @@ if !place_meeting(x,y+yVel,obj_wall){
 	y+=yVel
 }
 
+
 //Detection
-if !collision_line(x,y,obj_player.x,obj_player.y,obj_wall,0,0){
+if collision_ellipse(x-detectRangeH,y-detectRangeV,x+detectRangeH,y+detectRangeV,obj_player,0,0) && !collision_line(x,y,obj_player.x,obj_player.y,obj_wall,0,0){
 	aggressive = true
 	idle = false
 }else{
-	idle = true
 	aggressive = false
+	if !alert{
+		idle = true
+	}
+}
+
+//Alert
+if mouse_check_button_pressed(mb_left) && collision_ellipse(x-detectRangeH,y-detectRangeV,x+detectRangeH,y+detectRangeV,obj_player,0,0){
+	Alert()
 }
 
 //Forces
@@ -44,3 +56,5 @@ if forceX != 0 || forceY != 0{
 		forceY = 0
 	}
 }
+
+depth = -y/100

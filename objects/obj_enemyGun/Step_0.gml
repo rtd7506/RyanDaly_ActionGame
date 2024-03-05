@@ -1,5 +1,10 @@
 /// @description Insert description here
 // You can write your code in this editor
+
+if host.alert{
+	aimDir = point_direction(host.x,host.y,host.alertPos[0],host.alertPos[1])
+	
+}
 dir += angle_difference(aimDir,dir)*0.1
 image_angle = dir
 x = host.x + lengthdir_x(length,dir)

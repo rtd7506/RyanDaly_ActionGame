@@ -13,5 +13,8 @@ if shaking{
 	}
 }
 
-camera_set_view_pos(view_camera[0],followTarget.x-camera_get_view_width(view_camera[0])/2+shakeX,followTarget.y-camera_get_view_height(view_camera[0])/2-10+shakeY)
+camX = lerp(followTarget.x,mouse_x,0.2)//mean(followTarget.x,mouse_x)
+camY = lerp(followTarget.y-10,mouse_y,0.2)
+
+camera_set_view_pos(view_camera[0],camX-camera_get_view_width(view_camera[0])/2+shakeX,camY-camera_get_view_height(view_camera[0])/2+shakeY)
 

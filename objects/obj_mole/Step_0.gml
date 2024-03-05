@@ -1,7 +1,27 @@
 /// @description Insert description here
 // You can write your code in this editor
+if mounted{
+	image_xscale = host.image_xscale
+}else if falling{
+	yVel=0.5
+}else if escaping{
+	xVel = lengthdir_x(moveSpd,escapeDir)
+	yVel = lengthdir_y(moveSpd,escapeDir)
+	image_xscale = -xVel/abs(xVel)
+}else if burrowing{
+	xVel=0
+	yVel=0
+}
 
-image_xscale = host.image_xscale
+//Collisions
+if !mounted{
+	if !place_meeting(x+xVel,y,obj_wall){
+		x+=xVel
+	}
+	if !place_meeting(x,y+yVel,obj_wall){
+		y+=yVel
+	}
+}
 /*
 x = host.x
 y = host.y-9

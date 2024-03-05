@@ -1,31 +1,6 @@
 /// @description Insert description here
 // You can write your code in this editor
-/*
-if idle{
-	if xVel < 0{
-		xDir = -1
-	}else if xVel > 0{
-		xDir = 1
-	}
-	if yVel < 0{
-		yDir = 1
-	}else if yVel > 0{
-		yDir = 0
-	}
-}
-if aggressive{
-	if obj_player.x > x{
-		xDir = 1
-	}else{
-		xDir = -1
-	}
-	if obj_player.y < y-15{
-		yDir = 1
-	}else if obj_player.y > y{
-		yDir = 0
-	}
-}
-*/
+
 var gunDir = gun.dir mod 360
 if gunDir < 0{
 	gunDir += 360
@@ -42,8 +17,30 @@ if gunDir < 15 || gunDir > 165{
 }
 
 image_xscale = xDir
+if xVel == 0 && yVel == 0{
+	sprite_index = animsIdle[yDir]
+}else{
+	sprite_index = animsRun[yDir]
+}
 
-sprite_index = animsIdle[yDir]
+if dying{
+	sprite_index = spr_scDeath
+	//show_debug_message(image_index)
+	if image_index > 3{
+		dead = true
+		image_speed = 0
+		image_index = 5
+	}
+}
+if dead{
+	sprite_index = spr_scDeath
+	image_index = 5
+}
+if flashTime > 0{
+	flashTime -= 1
+	sprite_index = spr_scFlash
+}
+draw_sprite(spr_shadow,0,x,y+5)
 draw_self()
 
 

@@ -6,4 +6,3 @@ length = 14
 
 shotCooldown = 15
 canShoot = true
-

@@ -10,3 +10,6 @@ intensity = 0
 shakeDecay = 0.1
 shakeX = 0
 shakeY = 0
+
+camX = 0
+camY = 0
